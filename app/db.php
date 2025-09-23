@@ -13,4 +13,11 @@ $options = [
   $pdo = new PDO($dsn, null, null, $options); //Data Source Name, username for DB auth, password for DB auth, options array
   //SQLite is a file-based DB and doesn’t require a username/password
 
-  
+  $pdo->exec("
+ CREATE TABLE IF NOT EXISTS users ( 
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+");
