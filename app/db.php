@@ -20,4 +20,15 @@ $options = [
   password_hash TEXT NOT NULL,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+CREATE TABLE IF NOT EXISTS expenses (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  amount_cents INTEGER NOT NULL,
+  category TEXT NOT NULL,
+  occurred_on TEXT NOT NULL,   -- stored as YYYY-MM-DD
+  note TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
 ");
