@@ -17,8 +17,12 @@ $options = [
     PDO::ATTR_EMULATE_PREPARES   => false, //use real prepared statements, prevent sql injection
   ];
   
+  $dsnServer = "mysql:host=$host;port=$port;charset=$charset";
+  try {
   $pdo = new PDO($dsn, $user, $pass, $options); //Data Source Name, username for DB auth, password for DB auth, options array
-  //SQLite is a file-based DB and doesn’t require a username/password
+  } catch (PDOException $e) {
+    die("DB connect (server) failed: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
+  }
 
   $pdo->exec("
  CREATE TABLE IF NOT EXISTS users (
