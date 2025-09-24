@@ -26,6 +26,13 @@ $options = [
 
   $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 
+  $dsnDb = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
+  try {
+    $pdo = new PDO($dsnDb, $user, $pass, $options);
+  } catch (PDOException $e) {
+    die("DB connect (dbname) failed: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
+  }
+
   $pdo->exec("
  CREATE TABLE IF NOT EXISTS users (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
