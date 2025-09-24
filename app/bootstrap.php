@@ -7,5 +7,3 @@ require __DIR__ . '/db.php'; //db connection
 
 
 function e($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); } //prevents cross server scripting, converts special characters to html text
-
-function csrf_field(){ return '<input type="hidden" name="csrf" value="'.htmlspecialchars(csrf_token(), ENT_QUOTES).'">'; } //returns html element that holds csrf token so its sent with html form
