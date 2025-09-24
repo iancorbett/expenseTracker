@@ -32,4 +32,23 @@ function parse_amount_to_cents(string $amount): int { //takes in a string, retur
 
 $ok = 0; $fail = 0; $errors = [];
 
-  };
+};
+
+while (($row = fgetcsv($fh)) !== false) { //loop throgh each row in csv
+    try {
+      $date = trim($row[$map['date']] ?? ''); // ?? '' => if missing/null, default to empty string
+      $cat  = trim($row[$map['category']] ?? ''); // ?? '' => if missing/null, default to empty string
+      $amt  = trim($row[$map['amount']] ?? '');// ?? '' => if missing/null, default to empty string
+      $note = isset($map['note']) ? trim($row[$map['note']] ?? '') : ''; //isset() => core php function, returns true if variable exists and is not null
+
+      if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) throw new RuntimeException('Bad date'); //use regex to determine if date is valid
+      if ($cat === '') throw new RuntimeException('Bad category'); //print error message if category is empty
+      $cents = parse_amount_to_cents($amt);
+
+      $ins->execute([$uid, $cents, $cat, $date, $note]);//these 5 values will replace the "?" placeholders
+      $ok++; //increment $ok for each success
+    } catch (Throwable $e) {
+      $fail++; $errors[] = $e->getMessage(); //increment $fail for each failure and save errors in an array
+    }
+  }
+  fclose($fh);
