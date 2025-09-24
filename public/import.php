@@ -70,4 +70,12 @@ try {
 } catch (Throwable $e) {
     $msg = "Import error: " . $e->getMessage();
   }
-}
+} else {// if rquest is not a post
+    // Auto-import bundled CSV once for easy demo
+    try {
+      $res = import_csv($pdo, $uid, __DIR__ . '/../data.csv');//import starter csv
+      $msg = "Bundled data.csv imported. OK={$res['ok']}, FAIL={$res['fail']}";
+    } catch (Throwable $e) {
+      $msg = "Ready to import. (Place a data.csv at project root or upload below.)";
+    }
+  }
