@@ -1,5 +1,11 @@
-
 <?php
+$host = '127.0.0.1';       // the server MySQL is running on
+$db   = 'expense_demo';    // the database name
+$user = 'expense_user';    // the MySQL username
+$pass = 'expense_pass';    // the MySQL user’s password
+$charset = 'utf8mb4';      // character set (handles emojis + full Unicode)
+
+
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 $options = [
