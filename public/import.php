@@ -32,7 +32,7 @@ function parse_amount_to_cents(string $amount): int { //takes in a string, retur
 
 $ok = 0; $fail = 0; $errors = [];
 
-};
+
 
 while (($row = fgetcsv($fh)) !== false) { //loop throgh each row in csv
     try {
@@ -51,4 +51,7 @@ while (($row = fgetcsv($fh)) !== false) { //loop throgh each row in csv
       $fail++; $errors[] = $e->getMessage(); //increment $fail for each failure and save errors in an array
     }
   }
-  fclose($fh);
+  fclose($fh); //close file
+
+  return ['ok'=>$ok, 'fail'=>$fail, 'errors'=>$errors];
+};
