@@ -79,3 +79,4 @@ try {
       $msg = "Ready to import. (Place a data.csv at project root or upload below.)";
     }
   }
+?>
