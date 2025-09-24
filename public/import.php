@@ -55,3 +55,12 @@ while (($row = fgetcsv($fh)) !== false) { //loop throgh each row in csv
 
   return ['ok'=>$ok, 'fail'=>$fail, 'errors'=>$errors];
 };
+
+$msg = '';//initialize message to empty string
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { //check to see if request made was POST
+csrf_require(); //Makes sure the hidden CSRF token in the form matches the one in the session
+try {
+
+}
+}
