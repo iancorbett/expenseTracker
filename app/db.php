@@ -1,8 +1,9 @@
 <?php
 $host = '127.0.0.1';       // the server MySQL is running on
+$port = '3306';             // select port 3306
 $db   = 'expense_demo';    // the database name
 $user = 'expense_user';    // the MySQL username
-$pass = 'expense_pass';    // the MySQL user’s password
+$pass    = '';  // start as empty string
 $charset = 'utf8mb4';      // character set (handles emojis + full Unicode)
 
 
