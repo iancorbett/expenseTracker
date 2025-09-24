@@ -15,4 +15,8 @@ function parse_amount_to_cents(string $amount): int { //takes in a string, retur
     if (!is_file($path)) throw new RuntimeException("CSV not found: $path"); //return error if no file found at that path
     $fh = fopen($path, 'r'); //Opens the file for reading
     if (!$fh) throw new RuntimeException('Cannot open CSV'); //catch error if it cant be opened
-  };  
+  
+
+  $header = fgetcsv($fh); //fgetcsv($fh) => PHP’s built-in function for reading a line from a CSV file
+  if (!$header) throw new RuntimeException('Empty CSV'); //header is an array created, that holds comma separated values
+  };
