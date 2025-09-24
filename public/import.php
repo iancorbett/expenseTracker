@@ -80,3 +80,28 @@ try {
     }
   }
 ?>
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CSV Import (Raw PHP + PDO + MySQL)</title>
+  <style> /* writing styles here, so few that it doesnt warrant having a separate css file */
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 1.5rem; }
+    form { margin-top: 1rem; }
+    .msg { padding:.6rem .8rem; background:#f6f7fb; border:1px solid #e5e7eb; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <h1>CSV Import</h1>
+  <p class="msg"><?= e($msg) ?></p>
+
+  <form method="post" enctype="multipart/form-data">
+    <?= csrf_field() ?>
+    <label>Select CSV: <input type="file" name="csv" accept=".csv"></label>
+    <button type="submit">Import</button>
+  </form>
+
+  <p><a href="/index.php">View Table</a></p>
+</body>
+</html>
