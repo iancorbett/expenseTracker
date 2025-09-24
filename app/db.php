@@ -20,24 +20,24 @@ $options = [
   //SQLite is a file-based DB and doesn’t require a username/password
 
   $pdo->exec("
- CREATE TABLE IF NOT EXISTS users ( 
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT UNIQUE NOT NULL,
-  password_hash TEXT NOT NULL,
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+ CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(190) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS expenses (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL,
-  amount_cents INTEGER NOT NULL,
-  category TEXT NOT NULL,
-  occurred_on TEXT NOT NULL,   -- stored as YYYY-MM-DD
-  note TEXT,
-  created_at TEXT NOT NULL DEFAULT (datetime('now')),
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  amount_cents INT NOT NULL,
+  category VARCHAR(100) NOT NULL,
+  occurred_on DATE NOT NULL,
+  note VARCHAR(255),
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_expenses_user FOREIGN KEY (user_id) REFERENCES users(id)
+    ON DELETE CASCADE
 );
 
-CREATE INDEX IF NOT EXISTS idx_expenses_user_date 
-  ON expenses(user_id, occurred_on);
+CREATE INDEX IF NOT EXISTS idx_expenses_user_date ON expenses(user_id, occurred_on);
 ");
