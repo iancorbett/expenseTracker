@@ -19,4 +19,6 @@ function parse_amount_to_cents(string $amount): int { //takes in a string, retur
 
   $header = fgetcsv($fh); //fgetcsv($fh) => PHP’s built-in function for reading a line from a CSV file
   if (!$header) throw new RuntimeException('Empty CSV'); //header is an array created, that holds comma separated values
+
+  $map = array_flip(array_map('strtolower', $header)); //reverse keys and values, allows you to look up column ositions by name
   };
