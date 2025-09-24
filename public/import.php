@@ -61,6 +61,13 @@ $msg = '';//initialize message to empty string
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { //check to see if request made was POST
 csrf_require(); //Makes sure the hidden CSRF token in the form matches the one in the session
 try {
-
-}
+    if (!empty($_FILES['csv']['tmp_name'])) { //check if csv file was acutally uploaded
+        $res = import_csv($pdo, $uid, $_FILES['csv']['tmp_name']); //call import function usimg the database connection, user id, and the temporary file path 
+        $msg = "Uploaded CSV imported. OK={$res['ok']}, FAIL={$res['fail']}";
+    } else {
+        $msg = "Please choose a CSV file.";
+      }
+} catch (Throwable $e) {
+    $msg = "Import error: " . $e->getMessage();
+  }
 }
