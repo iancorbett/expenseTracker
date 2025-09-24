@@ -25,4 +25,11 @@ function parse_amount_to_cents(string $amount): int { //takes in a string, retur
   foreach (['date','category','amount'] as $need) {//these three fields are required
     if (!isset($map[$need])) throw new RuntimeException("Missing column: $need"); //if any of these three are not set, send error message
   }
+
+  //createe reusable SQL query with placeholders instead of raw values
+  $ins = $pdo->prepare("INSERT INTO expenses (user_id, amount_cents, category, occurred_on, note) 
+  VALUES (?,?,?,?,?)");
+
+$ok = 0; $fail = 0; $errors = [];
+
   };
