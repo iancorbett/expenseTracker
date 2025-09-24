@@ -24,6 +24,8 @@ $options = [
     die("DB connect (server) failed: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
   }
 
+  $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+
   $pdo->exec("
  CREATE TABLE IF NOT EXISTS users (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
