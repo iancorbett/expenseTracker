@@ -20,12 +20,21 @@ $options = [
   
   $dsnServer = "mysql:host=$host;port=$port;charset=$charset";
   try {
-  $pdo = new PDO($dsn, $user, $pass, $options); //Data Source Name, username for DB auth, password for DB auth, options array
+  $pdo = new PDO($dsnServer, $rootUser, $rootPass, $options); //Data Source Name, username for DB auth, password for DB auth, options array
   } catch (PDOException $e) {
     die("DB connect (server) failed: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
   }
 
-  $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+  $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+  CREATE USER IF NOT EXISTS '$appUser'@'localhost' IDENTIFIED BY '$appPass';
+  CREATE USER IF NOT EXISTS '$appUser'@'127.0.0.1' IDENTIFIED BY '$appPass';
+
+    GRANT ALL PRIVILEGES ON `$db`.* TO '$appUser'@'localhost';
+  GRANT ALL PRIVILEGES ON `$db`.* TO '$appUser'@'127.0.0.1';
+  FLUSH PRIVILEGES;
+  ");
 
   $dsnDb = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
   try {
