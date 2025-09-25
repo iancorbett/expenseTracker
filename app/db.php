@@ -2,12 +2,13 @@
 $host = '127.0.0.1';       // the server MySQL is running on
 $port = '3306';             // select port 3306
 $db   = 'expense_demo';    // the database name
-$user = 'expense_user';    // the MySQL username
-$pass    = '';  // start as empty string
 $charset = 'utf8mb4';      // character set (handles emojis + full Unicode)
 
+$rootUser = 'root';
+$rootPass = '';               
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$appUser  = 'expense_user';
+$appPass  = 'expense_pass';
 
 $options = [
     //PDO = PHP Data Objects, built-in PHP class for talking to databases
