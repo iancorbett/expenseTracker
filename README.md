@@ -21,7 +21,7 @@ outside of Laravel or other frameworks.
 ---
 
 ##  Sample CSV Format
-```csv
+
 date,category,amount,note
 2025-09-01,Food,12.50,Lunch burrito
 2025-09-03,Travel,45.00,Bus ticket
