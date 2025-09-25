@@ -8,3 +8,14 @@ This project was created to demonstrate **custom PHP development** skills
 outside of Laravel or other frameworks.
 
 ---
+
+## Features
+- Connects to MySQL using **PDO**
+- Creates database & tables automatically on first run
+- **Imports expenses from a CSV file** (upload or bundled `data.csv`)
+- Stores amounts safely as integer cents to avoid floating point issues
+- **Prepared statements** used everywhere to prevent SQL injection
+- **CSRF token + XSS escaping** for basic security
+- Displays results in a clean HTML table
+
+---
