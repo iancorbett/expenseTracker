@@ -19,3 +19,26 @@ outside of Laravel or other frameworks.
 - Displays results in a clean HTML table
 
 ---
+
+## Setup
+
+1. Clone the repo:
+
+git clone https://github.com/YOUR_USERNAME/expense-tracker-php.git
+cd expense-tracker-php
+
+
+2. Run PHP’s built-in server:
+
+php -S localhost:3000 -t public
+
+
+3. Visit:
+
+http://localhost:3000/import.php
+ → upload/import CSV
+
+http://localhost:3000/index.php
+ → view table
+
+ ---
