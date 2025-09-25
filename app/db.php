@@ -38,7 +38,7 @@ $options = [
 
   $dsnDb = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
   try {
-    $pdo = new PDO($dsnDb, $user, $pass, $options);
+    $pdo = new PDO($dsnDb, $appUser, $AppPass, $options);
   } catch (PDOException $e) {
     die("DB connect (dbname) failed: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
   }
