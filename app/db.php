@@ -31,7 +31,7 @@ $options = [
   CREATE USER IF NOT EXISTS '$appUser'@'localhost' IDENTIFIED BY '$appPass';
   CREATE USER IF NOT EXISTS '$appUser'@'127.0.0.1' IDENTIFIED BY '$appPass';
 
-    GRANT ALL PRIVILEGES ON `$db`.* TO '$appUser'@'localhost';
+  GRANT ALL PRIVILEGES ON `$db`.* TO '$appUser'@'localhost';
   GRANT ALL PRIVILEGES ON `$db`.* TO '$appUser'@'127.0.0.1';
   FLUSH PRIVILEGES;
   ");
@@ -62,6 +62,10 @@ CREATE TABLE IF NOT EXISTS expenses (
   CONSTRAINT fk_expenses_user FOREIGN KEY (user_id) REFERENCES users(id)
     ON DELETE CASCADE
 );
-
-CREATE INDEX IF NOT EXISTS idx_expenses_user_date ON expenses(user_id, occurred_on);
 ");
+
+try {
+    $pdo->exec("CREATE INDEX idx_expenses_user_date ON expenses(user_id, occurred_on)");
+  } catch (PDOException $e) {
+    if (($e->errorInfo[1] ?? null) !== 1061) { throw $e; }
+  }
