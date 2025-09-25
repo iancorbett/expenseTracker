@@ -20,3 +20,47 @@ $stmt = $pdo->prepare("
 $stmt->execute([$uid]); //execute statement with user id
 $rows = $stmt->fetchAll(); // get all rows as arrays
 ?>
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Expense Tracker (Raw PHP + MySQL)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 1.5rem; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+    th { background: #f5f5f5; }
+    .amount { text-align: right; }
+  </style>
+</head>
+<body>
+  <h1>Expenses</h1>
+  <p><a href="import.php">Import CSV</a></p>
+
+  <?php if (!$rows): ?>
+    <p>No expenses yet. Try importing a CSV!</p>
+  <?php else: ?>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($rows as $r): ?>
+          <tr>
+            <td><?= e($r['occurred_on']) ?></td>
+            <td><?= e($r['category']) ?></td>
+            <td class="amount">$<?= number_format($r['amount_cents'] / 100, 2) ?></td>
+            <td><?= e($r['note']) ?></td>
+          </tr>
+        <?php endforeach ?>
+      </tbody>
+    </table>
+  <?php endif; ?>
+</body>
+</html>

@@ -102,6 +102,6 @@ try {
     <button type="submit">Import</button>
   </form>
 
-  <p><a href="/index.php">View Table</a></p>
+  <p><a href="index.php">View Table</a></p>
 </body>
 </html>
